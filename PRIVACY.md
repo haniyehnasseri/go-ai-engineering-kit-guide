@@ -1,4 +1,4 @@
-# Privacy policy — draft for publisher review
+# Privacy policy
 
 Go AI Engineering Kit Guide is published by Haniyeh Nasseri. It is a skill-only plugin containing instructions and reference documentation. It has no MCP server, external app, analytics endpoint, or publisher-operated data storage. The plugin does not send chats or files to the publisher.
 

@@ -1,4 +1,4 @@
-# Terms of use — draft for publisher review
+# Terms of use
 
 Go AI Engineering Kit Guide is a free documentation and guidance plugin published by Haniyeh Nasseri. It provides AI-assisted explanations of the bundled Go AI Engineering Kit documentation.
 
@@ -8,4 +8,4 @@ Use of ChatGPT remains subject to the applicable OpenAI terms. GitHub-hosted sup
 
 Support is available through the repository's GitHub Issues. No paid service or purchase is offered.
 
-These draft terms do not grant a redistribution or software license. The publisher must choose any license separately before a license is added.
+These terms do not grant a redistribution or software license. The publisher must choose any license separately before a license is added.

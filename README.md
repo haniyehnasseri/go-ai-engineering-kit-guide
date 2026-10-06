@@ -8,8 +8,8 @@ The plugin contains the original kit-guide skill and bundled reference documenta
 
 ## Install a private copy
 
-Download this repository, ZIP the go-ai-engineering-kit-guide plugin directory, and ask Plugin Creator to import it as a skill-only plugin. Public directory submission is pending.
+Download this repository, ZIP its single root directory, and ask Plugin Creator to import it as a skill-only plugin. Public directory submission is pending.
 
 ## Support
 
-See [Support](SUPPORT.md). Privacy and terms drafts are in docs/drafts and await publisher approval.
+See [Support](SUPPORT.md). See [Privacy policy](PRIVACY.md) and [Terms of use](TERMS.md).
