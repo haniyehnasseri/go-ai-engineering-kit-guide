@@ -18,7 +18,9 @@
         "websiteURL": "https://github.com/haniyehnasseri/go-ai-engineering-kit-guide",
         "supportURL": "https://github.com/haniyehnasseri/go-ai-engineering-kit-guide/blob/main/SUPPORT.md",
         "privacyPolicyURL": "https://github.com/haniyehnasseri/go-ai-engineering-kit-guide/blob/main/PRIVACY.md",
-        "termsOfServiceURL": "https://github.com/haniyehnasseri/go-ai-engineering-kit-guide/blob/main/TERMS.md"
+        "termsOfServiceURL": "https://github.com/haniyehnasseri/go-ai-engineering-kit-guide/blob/main/TERMS.md",
+        "logo": "assets/icon.png",
+        "composerIcon": "assets/icon.png"
       },
       "review": {
         "commerce": false
