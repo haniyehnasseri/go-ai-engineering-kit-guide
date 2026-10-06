@@ -1,0 +1,21 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "go-ai-engineering-kit-guide",
+  "version": "1.0.0",
+  "description": "Version-aware guidance for installing, upgrading, configuring and troubleshooting the Go AI Engineering Kit.",
+  "author": {
+    "name": "Haniyeh Nasseri"
+  },
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "Go AI Engineering Kit Guide",
+        "shortDescription": "Go AI kit support guide",
+        "longDescription": "Answers Go AI Engineering Kit questions using the bundled kit-guide skill and versioned reference documentation.",
+        "developerName": "Haniyeh Nasseri",
+        "category": "Developer Tools",
+        "defaultPrompt": "Help me install, configure, upgrade or troubleshoot the Go AI Engineering Kit."
+      }
+    }
+  }
+}

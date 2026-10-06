@@ -1,0 +1,177 @@
+version: 1
+
+# Reference/template schema. Repositories should copy/customize this as repo-profile.yaml.
+service:
+  name: ""
+  criticality: normal   # low | normal | high | critical
+
+surfaces:
+  http_api: false
+  grpc_api: false
+  postgres: false
+  kafka: false
+  redis: false
+  elasticsearch: false
+
+# 0..5 are engineering priority weights, not probabilities.
+# 0 = N/A/disabled; 1 = very low; 2 = low; 3 = normal; 4 = high; 5 = critical.
+# The score matters only when the current task touches that risk surface.
+risk_priorities:
+  backward_compatibility: 3
+  data_integrity: 3
+  availability: 3
+  latency_performance: 3
+  security_auth: 3
+  privacy_confidentiality: 3
+  observability_operability: 3
+  event_compatibility: 3
+  concurrency_idempotency: 3
+  deployment_rollback: 3
+  maintainability_code_quality: 4
+  dependency_supply_chain: 3
+  search_relevance_index_compatibility: 0
+  config_environment_compatibility: 3
+  cross_stack_consistency: 2  # analysis priority only; not automated BC proof
+  delivery_pipeline: 3
+  error_contract_consistency: 3
+  cost_resource_efficiency: 2
+
+workflow:
+  default: standard
+  ask_engineer_when_unspecified: true
+  allow_auto: true
+  optional_role_model_overrides: true
+  unspecified_role_model_behavior: platform_default
+
+# Cross-agent orchestration is portable by design. Native adapters may strengthen
+# isolation/permissions, but the shared workflow state and deterministic gates
+# remain the source of truth across KiloCode, Codex, OpenCode and other agents.
+orchestration:
+  enforcement: native_plus_portable   # advisory | portable_state | native_plus_portable
+  task_state_dir: .ai-engineering/tasks
+  task_state_storage: local_untracked   # local_untracked | tracked | pipeline_artifact
+  task_state_required_for:
+    - standard
+    - high-risk
+  prefer_native_subagents: true
+  require_independent_review_context_when_available: true
+  resolve_auto_stages_before_completion: true
+  fallback_when_native_subagents_unavailable: separate_fresh_review_passes
+  fallback_when_native_permissions_unavailable: portable_state_plus_ci
+  platform_adapter: auto
+  model_routing:
+    ask_engineer_if_supported: true
+    unspecified_roles: platform_default
+
+# Organization/repository Definition of Done. Applicability depends on the
+# current task and delivery target; human actions can never be fabricated.
+definition_of_done:
+  default_delivery_target: code_complete  # code_complete | mr_ready | staging_validated | release_ready
+
+  engineering:
+    unit_tests_for_new_production_code: required
+    unit_tests_for_new_api: required
+    unit_test_exception_requires_reason: true
+    regression_test_for_bugfix_when_practical: required
+    no_unresolved_p0_p1_from_current_change: required
+    documentation_updated_if_applicable: required
+
+  merge_request:
+    applies_from_delivery_target: mr_ready
+    ci_green_for_exact_head: required
+    minimum_approvals: 1
+    no_blocking_unresolved_discussions: required_when_available
+    no_merge_conflicts: required_when_available
+
+  staging:
+    applies_from_delivery_target: staging_validated
+    deployed_to_staging: auto
+    manual_acceptance_testing: auto
+    no_known_critical_high_bugs_in_staged_change: auto
+    feature_demo_to_requester: auto
+
+  # Human evidence means a real engineer/task owner/tester or authoritative
+  # system recorded it. Agent-generated notes are never human evidence.
+  human_evidence_required_for:
+    - manual_acceptance_testing
+    - feature_demo_to_requester
+
+linked_repositories:
+  # Example deployment repo such as tw-applications.
+  # - role: deployment-config
+  #   provider: gitlab
+  #   project: group/tw-applications
+  #   token_env_var: GITLAB_READ_TOKEN
+  #   read_only: true
+  #   relevant_paths: [applications/my-service]
+  []
+
+environment_contract:
+  backward_compatible_by_default: true
+  deployment_repository_role: deployment-config
+  require_rollout_analysis_on_change: true
+
+error_contract:
+  review_client_error_changes: true
+  internal_error_details_must_not_reach_client: true
+  log_internal_errors_fully_server_side: true
+  dezhban:
+    enabled: auto
+    canonical_repository: https://git.simra.cloud/module/commons
+    canonical_go_package: git.simra.cloud/module/commons/errors
+    expected_style: commons_errors
+    flag_unknown_error_raw_detail_leak: true
+  hormuz:
+    enabled: auto
+    expected_style: readable_message_correct_http_status_existing_shape
+
+observability:
+  metrics_backend: prometheus
+  grafana:
+    enabled: auto
+    instance_name: sayeh
+    dashboards_repository_role: null
+  review_metric_changes: true
+  review_dashboard_compatibility: true
+  review_alert_slo_compatibility: true
+
+cross_stack:
+  consistency_analysis: auto
+  automated_backward_compatibility_verification: false
+  on_unverifiable_compatibility: record_not_verified
+
+git_delivery:
+  enabled: auto
+  provider: gitlab
+  base_url: ""
+  project: ""
+  token_env_var: GITLAB_READ_TOKEN
+  read_only: true
+  checks:
+    pipeline: true
+    approvals: true
+    unresolved_discussions: true
+    merge_conflicts: true
+    required_checks: true
+    code_owner_approval: auto
+
+knowledge:
+  architecture_path: ARCHITECTURE.md
+  facts_cache_path: .ai-engineering/repository-facts.yaml
+  preserve_human_notes: true
+  targeted_invalidation: true
+
+go_engineering:
+  preserve_existing_package_architecture: true
+  gofmt_required: true
+  prefer_stdlib_or_existing_dependency: true
+  dependency_review_on_module_change: true
+  code_quality_review: auto
+
+verification:
+  fast: []
+  precommit: []
+  high_risk: []
+  integration: []
+  e2e: []
+  benchmarks: []

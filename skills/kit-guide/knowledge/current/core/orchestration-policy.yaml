@@ -1,0 +1,75 @@
+version: 1
+
+# Portable orchestration semantics. Adapters MAY strengthen these with native
+# subagents/permissions, but they may not weaken required workflow evidence.
+statuses:
+  - pending
+  - running
+  - pass
+  - fail
+  - skipped
+  - not_verified
+  - na
+
+modes:
+  - off
+  - lightweight
+  - full
+  - auto
+
+stage_order:
+  - specification
+  - plan
+  - exploration
+  - domain_stack_analysis
+  - test_impact
+  - implementation
+  - go_code_quality
+  - go_dependency_review
+  - production_testing
+  - backward_compatibility
+  - environment_compatibility
+  - cross_stack_analysis
+  - error_contract
+  - observability
+  - performance_reliability
+  - security
+  - production_review
+  - git_delivery
+  - dod
+
+roles:
+  orchestrator:
+    may_edit_product_code: false
+    may_grant_authority: false
+  planner:
+    may_edit_product_code: false
+  explorer:
+    may_edit_product_code: false
+  implementer:
+    may_edit_product_code: true
+  tester:
+    may_edit_tests: true
+    may_edit_product_code: false
+  go_reviewer:
+    may_edit_product_code: false
+  compatibility_reviewer:
+    may_edit_product_code: false
+  production_reviewer:
+    may_edit_product_code: false
+  dod_verifier:
+    may_edit_product_code: false
+
+portable_enforcement:
+  selected_stage_must_be_resolved_before_completion: true
+  required_stage_pass_required_for_requested_assurance: true
+  skipped_or_not_verified_required_stage_caps_assurance: true
+  deterministic_commands_override_agent_claims: true
+  exact_head_delivery_evidence_required_when_configured: true
+  human_evidence_must_come_from_human_or_authoritative_system: true
+  agent_generated_artifacts_never_grant_authority: true
+
+fallbacks:
+  when_native_subagents_unavailable: separate_fresh_review_passes
+  when_native_permissions_unavailable: portable_workflow_state_plus_ci_and_human_review
+  when_external_evidence_unavailable: record_not_verified

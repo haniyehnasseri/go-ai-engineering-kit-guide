@@ -1,0 +1,24 @@
+latest_stable: "1.4.0"
+releases:
+  - version: "1.0.0"
+    status: historical
+    summary: initial generic Go microservice engineering-kit baseline
+  - version: "1.0.1"
+    status: historical
+    summary: installation/documentation hardening
+  - version: "1.1.0"
+    status: historical
+    summary: Git, SemVer, release lifecycle and CI packaging
+  - version: "1.2.0"
+    status: superseded
+    summary: repository context, delivery evidence, observability and stack-specialist design
+    superseded_by: "1.2.1"
+  - version: "1.2.1"
+    status: supported_historical
+    summary: corrected Sayeh/error/cross-stack semantics, risk scores and specialist completeness
+  - version: "1.3.0"
+    status: supported_historical
+    summary: senior Go implementation, code quality, dependency review and delivery-target DoD
+  - version: "1.4.0"
+    status: current
+    summary: cross-platform orchestration, machine task state/gate and thin KiloCode/OpenCode/Codex adapters

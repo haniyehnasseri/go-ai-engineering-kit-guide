@@ -1,0 +1,62 @@
+quick:
+  specification: off
+  plan: lightweight
+  exploration: lightweight
+  domain_stack_analysis: auto
+  test_impact: lightweight
+  implementation: full
+  go_code_quality: lightweight
+  go_dependency_review: auto
+  production_testing: lightweight
+  backward_compatibility: auto
+  environment_compatibility: auto
+  cross_stack_analysis: auto
+  error_contract: auto
+  observability: auto
+  performance_reliability: auto
+  security: auto
+  production_review: lightweight
+  git_delivery: auto
+  dod: full
+
+standard:
+  specification: lightweight
+  plan: full
+  exploration: auto
+  domain_stack_analysis: auto
+  test_impact: full
+  implementation: full
+  go_code_quality: full
+  go_dependency_review: auto
+  production_testing: full
+  backward_compatibility: auto
+  environment_compatibility: auto
+  cross_stack_analysis: auto
+  error_contract: auto
+  observability: auto
+  performance_reliability: auto
+  security: auto
+  production_review: full
+  git_delivery: auto
+  dod: full
+
+high-risk:
+  specification: full
+  plan: full
+  exploration: full
+  domain_stack_analysis: full
+  test_impact: full
+  implementation: full
+  go_code_quality: full
+  go_dependency_review: auto
+  production_testing: full
+  backward_compatibility: full
+  environment_compatibility: auto
+  cross_stack_analysis: auto
+  error_contract: auto
+  observability: auto
+  performance_reliability: full
+  security: auto
+  production_review: full
+  git_delivery: auto
+  dod: full
